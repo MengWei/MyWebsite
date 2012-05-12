@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= title
+  p 本页主要功能：#{title}
+  pre.code 会员ID：#{userId}
+
+
+  - if (userlist)
+      pre.code 获得userlist对象，开始打印
+        each user in userlist
+          li=user.id+' | '+user.real_name+' | '+user.cellphone+'    '
+              a(href='/user/'+user.id+'/edit') 编辑
+                input(type="checkbox", checked)
+        p 打印完成！
+  - else
+      p 没有获得userlist对象

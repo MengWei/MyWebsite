@@ -1,0 +1,26 @@
+extends layout
+block content
+  h1= title
+  form userxinxi
+  p 本页主要功能：
+  - if (users)
+  - var user = users[0]
+      pre.code
+          label
+            | 会员ID     :
+            input(name='id',value='#{user.id}')
+            br
+            | 会员手机号码 :
+            input(name='cellphone',value='#{user.cellphone}')
+            br
+            | 会员真实姓名 :
+            input(name='real_name',value='#{user.real_name}')
+            br
+            | 会员性别    :
+            input(name='sex',value='#{user.sex}')
+            br
+            | 会员等级    :
+            input(name='level',value='#{user.level}')
+            br
+       a(href='/save/'+user.id) 提交修改
+       <input type="submit" class="submit" value="提交修改" />

@@ -1,0 +1,22 @@
+!!!
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    | <a href='http://github.com/visionmedia/express'><img alt='Fork me on GitHub' id='ribbon' src='http://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png' /></a>
+    div#wrapper
+        div#container
+            ul#toc
+                li
+                    a(href='/home') 我的空间
+                li
+                    a(href='/user/001') 查看会员信息
+                li
+                    a(href='/user/001/edit') 编辑会员信息
+            ul#menu
+                li
+                    a(href='/home') 我的空间
+                    a(href='/user/001') 查看会员信息
+                    a(href='/user/001/edit') 编辑会员信息
+            block content
