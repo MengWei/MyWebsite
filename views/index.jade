@@ -1,13 +1,52 @@
 extends layout
 
 block content
-  h1 = title 网站首页。
-  p 需要十分努力的学习： #{title}！
-  li 测试一下li样式1
-  ul.li.em 测试一下li样式2
-  div 测试一下div
-  h3.routing Routing
-  pre.code 测试高亮框体！！
-  a "http://github.com/visionmedia/express/blob/master/examples/route-middleware/app.js"
-  <h3 id="route-param pre-conditions">Route Param Pre-conditions</h3>
-  <p>测试超级连接： <a href="http://www.extensivepro.com">点击连接进入“泛盈科技官网”</a>！</p>
+  link(rel='stylesheet', href='/stylesheets/uploadify.css')
+  script(src='/libs/jquery/jquery.js')
+  script(src='/libs/jquery/jquery.uploadify-3.1.min.js')
+  script(src='/libs/jquery/swfobject.js')
+  script(src='/libs/js/test.js')
+  script
+    　$(document).ready(function() {
+        　$("#uploadify").uploadify({
+              'uploader': '/libs/swf/uploadify.swf',// uploadify.swf 文件的相对路径，该swf文件是一个带有文字BROWSE的按钮，点击后淡出打开文件对话框，默认值：uploadify.swf。
+              'script':'uploadify.php',//后台处理程序的相对路径 。默认值：uploadify.php
+              //'onInit': function(){alert('Start Init...');ajax();},// 一个函数,做一些初始化的工作。
+              'cancelImg': '/images/uploadify-cancel.png',
+              'queueID' : 'fileQueue', //和存放队列的DIV的id一致// 文件队列的ID，该ID与存放文件队列的div的ID一致。
+              'auto'  : false, //是否自动开始// 设置为true当选择文件后就直接上传了，为false需要点击上传按钮才上传 。
+              'multi': false, //是否支持多文件上传
+              'buttonText': '选择文件', //按钮上的文字
+              'simUploadLimit' : 1, //一次同步上传的文件数目
+              'sizeLimit': 19871202, //设置单个文件大小限制，单位为byte
+              //'queueSizeLimit' : 10, //队列中同时存在的文件个数限制//当允许多文件生成时，设置选择文件的个数，默认值：999 。
+              'fileDesc': '支持格式:jpg/gif/jpeg/png/bmp.', //如果配置了以下的'fileExt'属性，那么这个属性是必须的
+              'fileExt': '*.jpg;*.gif;*.jpeg;*.png;*.bmp',//允许的格式
+              //'onSelect': //选择文件时触发，该函数有三个参数,(event:事件对象。queueID：文件的唯一标识，由6为随机字符组成。fileObj：选择的文件对象，有name、size、creationDate、modificationDate、type 5个属性。)
+              //'checkScript': 'servlet/Upload?name=yangxiang',//用来判断上传选择的文件在服务器是否存在的后台处理程序的相对路径
+              //'fileDataName': 'fileupload', //必须，和以下input的name属性一致//设置一个名字，在服务器处理程序中根据该名字来取上传文件的数据。默认为Filedata
+              //'method':'Post'//提交方式Post 或Get 默认为Post
+              //'folder':''//上传文件存放的目录
+              //'buttonImg':''//浏览按钮的图片的路径 。
+              //'hideButton':false// 设置为true则隐藏浏览按钮的图片 。
+              //'rollover':false//值为true和false，设置为true时当鼠标移到浏览按钮上时有反转效果。
+              //'width':110 //设置浏览按钮的宽度 ，默认值：110。
+              //'height':30//设置浏览按钮的高度 ，默认值：30。
+              //'wmode': //设置该项为transparent 可以使浏览按钮的flash背景文件透明，并且flash文件会被置为页面的最高层。 默认值：opaque 。
+              onComplete: function (event, queueID, fileObj, response, data) {
+                  alert("文件:" + fileObj.name + "上传成功");
+        　     },
+            　onError: function(event, queueID, fileObj) {
+            　 alert("文件:" + fileObj.name + "上传失败");
+            　},
+            　onCancel: function(event, queueID, fileObj){
+            　 alert("取消了" + fileObj.name);
+        　　　}
+        　});
+    　});
+  h1= title
+  p 这是我的个人学习空间，只为学习： #{title}！
+  input#uploadify(type="file",name="uploadify")
+  #fileQueue
+  a(href="javascript:$('#uploadify').uploadifyUpload()") 上传
+  a(href="javascript:$('#uploadify').uploadifyClearQueue()") 取消上传
